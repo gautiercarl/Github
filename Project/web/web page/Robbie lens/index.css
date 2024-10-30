@@ -1,0 +1,41 @@
+
+.formular{
+    background-color: #1F2039;
+    color:white;
+    font-family: manrope;
+}
+input{
+    margin: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+   
+}
+textarea{
+    width: 100%; 
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="submit"]{
+
+    background: linear-gradient(90deg,#8E86B5,#ACAEED);
+    font-family: "Manrope", sans-serif;
+    color: white;
+    border-radius: 50px;
+    width: 30%;
+   font-size: 1em;
+}
+
+input[type="submit"]:hover   {
+    background: linear-gradient(#696484,#8788BA);
+   } 
+
+
+  

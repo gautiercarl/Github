@@ -1,0 +1,15 @@
+create a list of object that containt question
+each question (object) has for propertie :
+-The true answer
+- three other choice
+
+
+HTML
+interface to display the question and a button next to display the following question
+div for the question name 
+div for choice
+
+
+CSS
+green by clicking the true answer
+red by clicking the false answer

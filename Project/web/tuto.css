@@ -1,0 +1,29 @@
+.jeux{
+    background-color: antiquewhite;
+    border: 10px antiquewhite solid;
+    padding: 50px;
+    width: 50px;
+    border-radius: 52% 48% 47% 53% / 31% 32% 68% 69% ;
+    color: white;
+}
+h2{
+    text-align: center;
+}
+
+caption{
+    padding-bottom: 20px;
+}
+td,th{
+    border: 1px solid black;
+    padding: 15px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    
+}
