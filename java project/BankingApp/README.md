@@ -27,16 +27,16 @@ Dies ist eine einfache Banking-Anwendung, die verschiedene Kontotypen wie **Giro
    git clone https://github.com/gautiercarl/Github.git
 
 2. Navigiere in das Projektverzeichnis:
-```bash
-cd "Github/java project/BankingApp"
+   ```bash
+   cd "Github/java project/BankingApp"
 
 3. Kompiliere und starte das Projekt:
 In der IDE: Öffne das Projekt und starte die Main-Klasse.
 Manuell:
-```bash
-javac *.java
-```bash
-java Main.java
+   ```bash
+   javac *.java
+   
+   java Main.java
 
 ## Verwendung
 Nach dem Start der Anwendung wird der Benutzer mit einem Menü begrüßt. Er kann wählen, ob er sich anmelden oder ein neues Konto erstellen möchte.
@@ -78,9 +78,10 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe LICENSE für Details.
 
 ## Mitwirkende
 Gautier Carl
-Weitere Features
-Überweisungen zwischen Konten
-Fehlerbehandlung bei ungültigen Eingaben
-Möglichkeit, mehrere Konten pro Benutzer zu haben
-markdown
+
+*Weitere Features:
+- Überweisungen zwischen Konten.
+- Fehlerbehandlung bei ungültigen Eingaben.
+- Möglichkeit, mehrere Konten pro Benutzer zu haben.
+
 
