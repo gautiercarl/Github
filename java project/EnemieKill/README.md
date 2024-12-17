@@ -34,12 +34,15 @@ EnemyKill is a simple Java game where the player must locate and destroy enemy p
 1. Ensure you have [Java installed](https://www.oracle.com/java/technologies/javase-downloads.html) on your system.
 2. Save the game code in a file named `EnemyKill.java`.
 3. Compile the code:
+   
+   ```bash
+   javac *.java
+   
+   
    ```
-   javac EnemyKill.java
+4. Run the program:
    ```
-4. Run the game:
-   ```
-   java EnemyKill
+   java Main.java
    ```
 5. Follow the on-screen instructions to play.
 
