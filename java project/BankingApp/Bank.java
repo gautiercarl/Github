@@ -16,6 +16,7 @@ public class Bank {
 
     }
 
+    // Gibt die Benutzer-Datenbank zurück (Zugriff auf die HashMap mit Benutzern)
     public HashMap<String, Benutzer> getBenutzerDatenbank() {
         return BenutzerDatenbank;
 
@@ -25,7 +26,7 @@ public class Bank {
         boolean running = true;
         int choice = 0;
         Scanner scanner = new Scanner(System.in);
-
+        // Menü zur Auswahl des Konto-Typs
         while (running) {
             System.out.println("Welche Art von Konto wollen Sie eröffnen?");
             System.out.println("------------------------------------------");
@@ -46,8 +47,9 @@ public class Bank {
 
             switch (choice) {
                 case 1:
+                    // Überprüft, ob der Benutzer bereits ein Girokonto hat
                     Benutzer benutzer = BenutzerDatenbank.get(name);
-                    boolean kontoExist=false;
+                    boolean kontoExist = false;
                     for (Bankkonto konto : benutzer.getListkonten()) {
                         if (konto instanceof Girokonto) {
                             System.out.println("Sie haben schon ein Girokonto");
@@ -56,47 +58,47 @@ public class Bank {
                         }
                     }
                     if (benutzer != null && !kontoExist) {
-
+                        // Erzeugt ein neues Girokonto, falls der Benutzer noch keines hat
                         String kontonummer = generateKontonummer();
 
                         Bankkonto konto = new Girokonto(benutzer.getName(), kontonummer, 100);
                         konten.put(kontonummer, konto);
                         ArrayList<Bankkonto> listkonten = benutzer.getListkonten();
-                        listkonten.add(konto); // wird auch in arrayList der benutzer transportiert
+                        listkonten.add(konto); // Fügt das Konto zur Liste des Benutzers hinzu
 
                         System.out.println("Neues Konto für " + benutzer.getName() + " wurde erstellt.");
-                      
+
                         System.out.println("Ihre Kontonummer: " + kontonummer);
                         System.out.println("------------------------------------------");
-                        running=false;
+                        running = false;
                     }
 
                     break;
                 case 2:
-                 benutzer = BenutzerDatenbank.get(name);
-                 kontoExist=false;
-                for (Bankkonto konto : benutzer.getListkonten()) {
-                    if (konto instanceof Sparrkonto) {
-                        System.out.println("Sie haben schon ein Sparrkonto");
-                        kontoExist = true;
-                        break;
+                    benutzer = BenutzerDatenbank.get(name);
+                    kontoExist = false;
+                    for (Bankkonto konto : benutzer.getListkonten()) {
+                        if (konto instanceof Sparrkonto) {
+                            System.out.println("Sie haben schon ein Sparrkonto");
+                            kontoExist = true;
+                            break;
+                        }
                     }
-                }
-                if (benutzer != null && !kontoExist) {
+                    if (benutzer != null && !kontoExist) {
 
-                    String kontonummer = generateKontonummer();
+                        String kontonummer = generateKontonummer();
 
-                    Bankkonto konto = new Sparrkonto(benutzer.getName(), kontonummer, 100);
-                    konten.put(kontonummer, konto);
-                    ArrayList<Bankkonto> listkonten = benutzer.getListkonten();
-                    listkonten.add(konto); // wird auch in arrayList der benutzer transportiert
+                        Bankkonto konto = new Sparrkonto(benutzer.getName(), kontonummer, 100);
+                        konten.put(kontonummer, konto);
+                        ArrayList<Bankkonto> listkonten = benutzer.getListkonten();
+                        listkonten.add(konto); // wird auch in arrayList der benutzer transportiert
 
-                    System.out.println("Neues Konto für " + benutzer.getName() + " wurde erstellt.");
-                    System.out.println("Ihre Kontonummer: " + kontonummer);
-                    System.out.println("------------------------------------------");
-                    running=false;
+                        System.out.println("Neues Konto für " + benutzer.getName() + " wurde erstellt.");
+                        System.out.println("Ihre Kontonummer: " + kontonummer);
+                        System.out.println("------------------------------------------");
+                        running = false;
 
-                }
+                    }
 
                     break;
 
@@ -125,39 +127,39 @@ public class Bank {
 
     }
 
-    public void  Überweisen(String kontonummerSender,String kontonummerEmpfänger,double betrag){
-        Bankkonto senderKonto= getKonto(kontonummerSender);
-        
-        Bankkonto empfängerKonto= getKonto(kontonummerEmpfänger);
-        if (empfängerKonto== null) {
+    public void Überweisen(String kontonummerSender, String kontonummerEmpfänger, double betrag) {
+        Bankkonto senderKonto = getKonto(kontonummerSender);
+
+        Bankkonto empfängerKonto = getKonto(kontonummerEmpfänger);
+        // Überprüft, ob das Empfängerkonto existiert und ob der Sender genügend
+        // Guthaben hat
+        if (empfängerKonto == null) {
             System.out.println("Ungültiger Kontonummer!");
 
-        }
-        else if (empfängerKonto!= null && senderKonto.kontostand>betrag) {
-            senderKonto.kontostand-=betrag;
-            empfängerKonto.kontostand+=betrag;
-            System.out.println(betrag+ "EUR Wurde erfolgreich überwiesen");
+        } else if (empfängerKonto != null && senderKonto.kontostand > betrag) {
+            senderKonto.kontostand -= betrag;
+            empfängerKonto.kontostand += betrag;
+            System.out.println(betrag + "EUR Wurde erfolgreich überwiesen");
 
-        } else{
+        } else {
             System.out.println("Unzureichender Kontostand oder Ungültiger Betrag");
 
         }
-       
-
-        
-       
-
 
     }
+
+    // Menü für die Bank mit Optionen für den Benutzer
     public void bankmenu(boolean running, String name) {
         int choice = 0;
         Benutzer benutzer = BenutzerDatenbank.get(name);
         Scanner scanner = new Scanner(System.in);
+
         while (running) {
+            // Hauptmenü für den Benutzer
             System.out.println("Willkommen " + benutzer.getName() + " was wollen Sie jetzt tun?");
             System.out.println("------------------------------------------");
 
-            System.out.println("1- konto erstellen");
+            System.out.println("1- Bankkonto erstellen");
             System.out.println("2- konto führen");
             System.out.println("3- Abmelden");
 
@@ -177,16 +179,8 @@ public class Bank {
                     neuesKontoErstellen(name);
                     break;
                 case 2:
-                benutzer.meineKonten(this);
-                    // System.out.println("Geben Sie bitte ihrer Kontonummer ein: ");
-                    // String kontonummer = scanner.nextLine();
-                    // try {
-                    //     Bankkonto konto = getKonto(kontonummer);
-                    //     konto.kontoMenu();
+                    benutzer.meineKonten(this); // Zeigt alle Konten des Benutzers
 
-                    // } catch (Exception e) {
-                    //     System.out.println("Kontonummer ungültig");
-                    // }
                     break;
 
                 case 3:

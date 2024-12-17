@@ -17,4 +17,12 @@ public String getKontoname(){
     return name;
 }
 
+// Methode zur Berechnung der Zinsen und Hinzufügung zum Kontostand
+public void zinsenHinzufuegen() {
+    double zinsenBetrag = kontostand * zinsen / 100;  // Zinsen als Prozentsatz des Kontostands
+    kontostand += zinsenBetrag;
+    System.out.println("Zinsen in Höhe von " + zinsenBetrag + " wurden hinzugefügt.");
+    zeigeKontostand();
+}
+
 }

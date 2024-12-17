@@ -25,7 +25,7 @@ public class Girokonto extends Bankkonto implements Kontoinfo{
     }
 
 }
-
+// Implementierung der Methode getKontoname aus der Kontoinfo-Schnittstelle, die den Kontonamen zurückgibt
 @Override
 public String getKontoname(){
     return name;

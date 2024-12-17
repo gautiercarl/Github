@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Bankkonto {
     private String kontoinhaber;
-    protected double kontostand; // zugänglich für die Unterklassen
+    protected double kontostand;// Der Kontostand, der für Unterklassen zugänglich ist
     private String kontonummer;
 
     public Bankkonto(String kontoinhaber, String kontonummer) {
@@ -46,17 +46,18 @@ public abstract class Bankkonto {
 
     }
 
-
     public void zeigeKontostand() {
         System.out.println("Kontostand von " + kontoinhaber + ": " + kontostand);
     }
-//
+
+    //
     public void überweisenAnEmpfänger(Bank bank, String kontonummerEmpfänger, double betrag) {
         bank.Überweisen(this.kontonummer, kontonummerEmpfänger, betrag);
     }
 
     // Methode, die das Menü des Kontos anzeigt und die Benutzereingaben verarbeitet
-    //Dependency Injection (DI) hier wir die Instanz Bank von Außen gegeben bis in Main durch die unterschiedliche parameter in dem Pfad oder Baum Aufruf
+    // Dependency Injection (DI) – Hier wird die Bankinstanz von außen übergeben
+    // und ermöglicht den Zugriff auf Bankmethoden wie Überweisungen
     public void kontoMenu(Bank bank) {
         boolean running = true;
         int choice = 0;
@@ -102,15 +103,15 @@ public abstract class Bankkonto {
                     abheben(betragAb);
                     break;
                 case 4:
-                System.out.println("Geben Sie bitte die Kontonummer des Empfängers:  ");
-                String kontonummerEmpfänger= scanner.nextLine();
-                System.out.println("Wie viel wollen Sie Überweisen?");
+                    System.out.println("Geben Sie bitte die Kontonummer des Empfängers:  ");
+                    String kontonummerEmpfänger = scanner.nextLine();
+                    System.out.println("Wie viel wollen Sie Überweisen?");
 
                     double betrag = scanner.nextInt();
                     scanner.nextLine();
-                   
+
                     überweisenAnEmpfänger(bank, kontonummerEmpfänger, betrag);
-                break;
+                    break;
                 case 5:
                     System.out.println("");
                     running = false;

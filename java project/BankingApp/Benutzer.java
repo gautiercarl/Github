@@ -1,5 +1,4 @@
 package BankingApp;
-// class user( name, passwort, kennnumer, listkonten, list name passwort, boolean connnected ) methode account erstellen anmelden abmelden
 
 import java.util.*;
 
@@ -8,13 +7,15 @@ public class Benutzer {
     private String name;
     private String passwort;
     private ArrayList<Bankkonto> listkonten = new ArrayList<>();
-    private boolean isConnected;
+    private boolean isConnected; // Der Verbindungsstatus des Benutzers (ob der Benutzer eingeloggt ist oder
+                                 // nicht)
 
     Scanner scanner = new Scanner(System.in);
 
     public Benutzer(String name, String passwort) {
         this.name = name;
         this.passwort = passwort;
+        this.isConnected=true;
     }
 
     public ArrayList<Bankkonto> getListkonten() {
@@ -29,6 +30,7 @@ public class Benutzer {
         return isConnected;
     }
 
+    // Methode, um sich mit einem Benutzernamen und Passwort einzuloggen
     public boolean login(String name, String passwort) {
         if (name.equals(this.name) && passwort.equals(this.passwort)) {
             isConnected = true;
@@ -37,73 +39,59 @@ public class Benutzer {
         return false;
     }
 
+    // Methode, die dem Benutzer ermöglicht, seine Konten zu verwalten
     public void meineKonten(Bank bank) {
         boolean running = true;
         int choice = 0;
-        int exit=0;
+        int exit = 0;
         Scanner scanner = new Scanner(System.in);
         if (listkonten.isEmpty()) {
             System.out.println("Sie haben noch kein Bankkonto");
 
         } else {
             while (running) {
-           
 
-            System.out.println("Meine Konten");
-       
-        System.out.println("------------------------------------------");
+                System.out.println("Meine Konten");
 
-        for (int i = 0; i < listkonten.size(); i++) {
-            Bankkonto bankkonto = listkonten.get(i);
-            if (bankkonto instanceof Kontoinfo) {
-                Kontoinfo konto = (Kontoinfo) bankkonto;
-                System.out.println((i + 1) + "-" + konto.getKontoname());
+                System.out.println("------------------------------------------");
 
-            }
-         
-              exit=i;
-        }
-        exit+=2;
-        System.out.println(exit + "- Zurück" );
-        System.out.print("Wählen Sie eine Option: ");
-       
-            try {
-                choice = scanner.nextInt();
-                scanner.nextLine();
-                if (choice==exit){
-                    running=false;
-                    break;
+                for (int i = 0; i < listkonten.size(); i++) {
+                    Bankkonto bankkonto = listkonten.get(i);
+
+                    if (bankkonto instanceof Kontoinfo) {
+                        Kontoinfo konto = (Kontoinfo) bankkonto;
+                        System.out.println((i + 1) + "-" + konto.getKontoname());
+
+                    }
+
+                    exit = i;
                 }
-                if(choice>listkonten.size()){
-                    System.out.println("Ungültiger Wahlt. Versuchen Sie es erneut");
+                exit += 2;
+                System.out.println(exit + "- Zurück");
+                System.out.print("Wählen Sie eine Option: ");
 
-                    break;
+                try {
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (choice == exit) {
+                        running = false;
+                        break;
+                    }
+                    if (choice > listkonten.size()) {
+                        System.out.println("Ungültiger Wahlt. Versuchen Sie es erneut");
+
+                        break;
+                    }
+                    Bankkonto bankkonto = listkonten.get(choice - 1);
+                    bankkonto.kontoMenu(bank);
+                } catch (InputMismatchException e) {
+                    System.out.println("Ungültige Nummer. Bitte geben Sie eine Nummer ein.");
+                    scanner.nextLine();
+                    continue;
                 }
-                Bankkonto bankkonto= listkonten.get(choice-1);
-                bankkonto.kontoMenu(bank);
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Ungültige Nummer. Bitte geben Sie eine Nummer ein.");
-                scanner.nextLine();
-                continue;
+
             }
 
-
-            
         }
-
-
     }
 }
-}
-
-
-       
-
-       
-          
-            
-
-            
-
-          
