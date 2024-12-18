@@ -1,32 +1,58 @@
 let display = document.getElementById("display");
-let numberBtn = document.querySelectorAll(".number");
-console.log(numberBtn);
+
+// Löscht die Anzeige
 function clearDisplay() {
   display.value = "";
 }
+
+// Fügt Eingaben zur Anzeige hinzu
 function appendToDisplay(input) {
-  display.value += input;
+  if (display.value.length < 20) { // Begrenze auf 20 Zeichen
+    display.value += input;
+  } else {
+    alert("Maximum input length reached");
+  }
 }
-function appendToDisplayNegation(input) {
-  display.value = input + display.value;
+
+// Negiert die aktuelle Eingabe
+function appendToDisplayNegation() {
+  if (display.value.startsWith("-")) {
+    display.value = display.value.substring(1);
+  } else {
+    display.value = "-" + display.value;
+  }
 }
-function calculate() {
+
+function calculatePercentage() {
   try {
-    display.value = eval(display.value);
+    // Prüfen, ob der Display-Inhalt ein gültiger Ausdruck ist
+    const value = parseFloat(display.value);
+    if (!isNaN(value)) {
+      // Prozentsatz berechnen
+      display.value = value / 100;
+    } else {
+      display.value = "Error";
+    }
   } catch (error) {
     display.value = "Error";
   }
-  /* for (let i = 0; i <= 9; i += 1) {
-    numberBtn[i].addEventListener("click", () => {
-      display.value = 8;
-      appendToDisplay(numberBtn[i].value);
-    });
-    numberBtn[i].addEventListener("click", () => {
-    //  appendToDisplay(input);
-    });
-    
-  }*/
 }
 
-//empecher les bouttons de s'ajouter aux résultats du calcul
-// faire la fonction %
+// Führt die Berechnung durch
+function calculate() {
+  try {
+    let result = Function(`"use strict"; return (${display.value})`)();
+    display.value = result;
+  } catch (error) {
+    display.value = "Error";
+  }
+}
+
+// Event-Listener für die Buttons
+document.querySelectorAll(".number").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    appendToDisplay(btn.innerText);
+  });
+});
+
+document.query
